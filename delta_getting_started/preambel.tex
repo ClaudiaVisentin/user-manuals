@@ -1,0 +1,146 @@
+% 1. Definieren der Dokumentklasse.
+\documentclass[
+  pdftex,                           % PDFTex verwenden um ausschliesslich ein PDF zu erzeugen
+  a4paper,                          % A4 Papier
+  doubleside,                       % Doppelseitiger Druck
+  11pt,                             % Standard Schriftgrösse
+  parskip=half,                     % Europäischer Satz mit Abstand zwischen Absätzen
+  headsepline,                      % Linie nach Kopfzeile
+  ]{scrreprt}                       % KOMA-Script Klasse
+
+% 2. Zeichencodierung und Zeichensatz
+\usepackage[utf8]{inputenc}         % 'utf8' -> nicht kompatibel mit TeXnicCenter (unterstützt kein UTF-8)
+\usepackage[T1]{fontenc}            % 'T1' Codierung für die Schrift
+
+% 3. Lokalisierung
+\usepackage[english, american]{babel}
+\usepackage{textcomp}               % Euro Symbol (\texteuro}
+\usepackage{upgreek}				% Paket für nichtkursive griechische Kleinbuchstaben
+
+% 4. Schriften
+\usepackage{courier}                % Courier laden (wird für Code verwendet)
+\usepackage{helvet}                 % Helvetica laden
+
+% 5. Textpakete und Optionen
+\usepackage{setspace}               % Paket für Textabstände
+\onehalfspacing                     % 1.5-facher Zeilenabstand
+\usepackage[section]{placeins}      % Paket für Flusskontrolle -> verhindert, das Flussobjekte aus
+                                    % einer Section heraus geschoben werden
+\usepackage{enumerate}
+
+% 6. Seiteneinstellungen
+\topmargin-12mm                     % Oberer Seitenrand verstellen -> Hack, verbessern
+\headheight0.95cm                   % Höhe der Kopfzeile
+\textheight24.2cm                   % Texthöhe (ohne Kopf- und Fusszeile)
+\footskip1.2cm                      % Abstand zwischen Text und unterem Ende der Fusszeile
+\raggedbottom                       % Kein vertikaler Blocksatz
+
+% 7. Kopf-/Fusszeilen, Fussnoten
+\usepackage{scrpage2}
+\usepackage{remreset}
+\makeatletter
+\@removefromreset{footnote}{chapter}
+\makeatother
+
+% 8. Bilder, Tabellen, Boxen
+\usepackage[pdftex]{graphicx}       % Bilder
+\usepackage{booktabs}               % mehrere Befehle für die Tabellen
+\usepackage{array}
+\usepackage{framed}                 % Paket für Boxen
+\usepackage{pdfpages}
+\graphicspath{                      % Suchpfade für Bilder
+  {img/},
+  {Bilder/},
+  {Grafiken/},
+  {images/},
+  {template/},
+  {Img/},
+  {abb/},
+  {}}
+\usepackage[format=hang,justification=centering]{caption}   
+\usepackage{csvsimple}
+
+% 9. Farben
+\usepackage{color}                  % Paket für Farben laden
+\definecolor{LinkColor}{rgb}{0,0,0} % Verschiedene Farbdefinitionen
+\definecolor{darkblue}{rgb}{0,0,0.6}
+\definecolor{darkred}{rgb}{0.6,0,0}
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+\definecolor{red}{rgb}{0.98,0,0}
+\definecolor{lstbggray}{rgb}{0.95,0.95,0.95}
+\definecolor{gray50}{rgb}{0.5,0.5,0.5}
+
+\definecolor{ntblightgray}{gray}{0.8}
+\definecolor{ntbdarkgray}{gray}{0.7}
+\definecolor{ntbblue}{cmyk}{1, 0.45, 0, 0.18}
+\definecolor{ntblightblue}{cmyk}{0.55, 0.28, 0.05, 0.0}
+
+% 10. Mathematik
+\usepackage{amsmath}                % Verbesserter Mathematik Satz
+\usepackage{amssymb}                % Zahlenmenngen in der Mathematik
+\usepackage{trfsigns}               % Zeichen für Transformationen
+\usepackage{mathptmx}               % Times New Roman für Mathematik
+
+% 11. Codesegmente
+\usepackage{listings}
+\lstdefinelanguage{kmake}{
+  keywords={ifeq, else, endif},
+  morekeywords={},
+  otherkeywords={},
+  sensitive=true,
+  comment=[l]{\#},
+  string=[s]{"}{"},
+  showspaces=false,
+}
+\lstloadlanguages{C, kmake}          % benötigte Sprachen laden
+\lstset{                            % Einstellungen für C
+  language=C,
+  basicstyle=\scriptsize\ttfamily,
+  commentstyle=\color{darkgreen},
+  keywordstyle=\bfseries\color{darkblue},
+  stringstyle=\color{darkred},
+%  showspaces=false,
+  columns=fixed,
+  numbers=left,
+%  frame=none,
+  numberstyle=\tiny,
+  breaklines=true,
+%  captionpos=b,
+  showstringspaces=false,
+% xleftmargin=1cm,
+  tabsize=4,
+  backgroundcolor=\color{lstbggray},
+  numberbychapter=false
+}
+
+\let\verbatimorg\verbatim
+\renewcommand\verbatim{\small\verbatimorg}
+
+
+% 12. Metadaten
+\title{EEDURO Delta - Getting Started Guide}
+\author{Martin Züger, Stefan Landis}
+\date{\today}
+
+% 13. PDF-Einstellungen
+\usepackage[
+  pdftitle={EEDURO Delta - Getting Started Guide},
+  pdfauthor={Martin Zueger, Stefan Landis},
+  pdfcreator={Kile (http://kile.sourceforge.net)},
+  pdfsubject={User Manual},
+  pdfkeywords={NTB, EEROS, EEDURO, Delta, Robot},
+  pdfpagemode=UseOutlines,          % Inhaltsverzeichnis anzeigen beim öffnen
+  pdfdisplaydoctitle=true           % Dokumenttitel statt Dateiname anzeigen
+  ]{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=LinkColor,              % Farbe für Links
+  citecolor=LinkColor,              % Farbe für Literaturreferenzen
+  filecolor=LinkColor,              % 
+  menucolor=LinkColor,              % 
+  pagecolor=LinkColor,              % Farbe für Links auf Seitenzahlen
+  urlcolor=LinkColor}               % Farbe für URLs
+
+% 14. Eigene Befehle
+% 14.1. Text überstreichen
+\newcommand{\OL}[1]{$\overline{\text{#1}}$}
